@@ -1,1 +1,10 @@
-<p>issue-list works!</p>
+  <ul>
+  <li *ngFor="let issue of issues$ | async">{{ issue.title }}
+    <ul>
+      <li>{{ issue.body }} </li>
+      <li>{{ issue.created_at | date }} </li>
+      <li> <span *ngFor="let label of issue.labels"> {{ label.name}},</span> </li>
+      <li>{{ issue.user.login }} <div class="avatar" [ngStyle]="{backgroundImage: 'url(' + issue.user.avatar_url + ')'}"></div></li>
+    </ul>
+  </li>
+</ul>
