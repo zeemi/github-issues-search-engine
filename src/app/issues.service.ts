@@ -1,5 +1,5 @@
-import { Injectable } from '@angular/core';
-import { Observable, of} from 'rxjs';
+import {EventEmitter, Injectable} from '@angular/core';
+import { Observable, of, Subject } from 'rxjs';
 import fakeIssues from './issues';
 
 @Injectable({
@@ -8,12 +8,16 @@ import fakeIssues from './issues';
 
 export class IssuesService {
   // https://api.github.com/search/issues?q=
-  issues$: Observable<any>;
+  issues$ = new EventEmitter();
   constructor() {
-    this.issues$ = of(fakeIssues);
+    this.issues$.emit(fakeIssues);
   }
 
-  getAll() {
+  getIssuesf() {
     return this.issues$;
+  }
+
+  search(query) {
+    return this.issues$.emit([...fakeIssues, ...fakeIssues]);
   }
 }
