@@ -1,11 +1,33 @@
-  <ul>
-  <li *ngFor="let issue of issues$ | async">{{ issue.title }}
-    <ul>
-      <li>{{ issue.body }} </li>
-      <li>{{ issue.created_at | date }} </li>
-      <li> <span *ngFor="let label of issue.labels"> {{ label.name}},</span> </li>
-      <li>{{ issue.user.login }} <div class="avatar" [ngStyle]="{backgroundImage: 'url(' + issue.user.avatar_url + ')'}"></div></li>
-      <li><button [ngClass]="{'btn-active': likedService.liked[issue.id]}" (click)="toggleLiked(issue.id)">Like it!</button></li>
-    </ul>
-  </li>
-</ul>
+<div class="spinner-container">
+  <mat-progress-spinner *ngIf="issuesService.isLoading$ | async"  [diameter]="50" mode="indeterminate"></mat-progress-spinner>
+</div>
+<div *ngIf="issuesService.issues$ | async as issues">
+  <mat-grid-list cols="1">
+    <mat-card *ngFor="let issue of issues" class="card">
+      <mat-card-header>
+        <div mat-card-avatar class="header-image"
+             [ngStyle]="{backgroundImage: 'url(' + issue.user.avatar_url + ')'}"></div>
+        <mat-card-title>
+          <a [href]="issue.html_url" target="_blank">{{issue.title}}</a>
+        </mat-card-title>
+        <mat-card-subtitle>
+          {{ issue.user.login }} at {{ issue.created_at | date }}
+        </mat-card-subtitle>
+      </mat-card-header>
+      <mat-card-content>
+        {{ issue.body }}
+      </mat-card-content>
+      <mat-chip-list *ngIf="issue.labels.length > 0" aria-label="Fish selection">
+        <mat-chip *ngFor="let label of issue.labels"> {{label.name}}</mat-chip>
+      </mat-chip-list>
+      <mat-card-actions>
+        <button mat-raised-button [color]="likedService.liked[issue.id] ? 'primary': undefined"
+                (click)="toggleLiked(issue.id)">LIKE
+        </button>
+      </mat-card-actions>
+      <mat-card-footer>
+      </mat-card-footer>
+    </mat-card>
+  </mat-grid-list>
+  <div *ngIf="issues.length === 0"> try a different query</div>
+</div>

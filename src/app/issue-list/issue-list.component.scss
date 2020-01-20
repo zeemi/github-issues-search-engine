@@ -1,11 +1,17 @@
-.avatar {
-  width: 100px;
-  height: 100px;
-  background-position: center;
-  background-size: contain;
-  background-repeat: no-repeat;
+.header-image {
+  background-size: cover;
+}
+
+.card {
+  margin-top: 10px;
 }
 
 .btn-active {
   background-color: lightblue;
+}
+
+.spinner-container {
+  display: flex;
+  justify-content: center;
+  height: 70px;
 }
