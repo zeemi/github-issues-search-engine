@@ -5,6 +5,7 @@
       <li>{{ issue.created_at | date }} </li>
       <li> <span *ngFor="let label of issue.labels"> {{ label.name}},</span> </li>
       <li>{{ issue.user.login }} <div class="avatar" [ngStyle]="{backgroundImage: 'url(' + issue.user.avatar_url + ')'}"></div></li>
+      <li><button [ngClass]="{'btn-active': likedService.liked[issue.id]}" (click)="toggleLiked(issue.id)">Like it!</button></li>
     </ul>
   </li>
 </ul>
