@@ -22,7 +22,7 @@ export class SearchBarComponent implements AfterViewInit {
       .pipe(
         map(event => event.target.value),
         map(value => value.trim()),
-        filter(value => value),
+        filter(value => value.length > 1),
         debounceTime(400),
         distinctUntilChanged()
       );
