@@ -14,8 +14,6 @@ export class SearchBarComponent implements AfterViewInit {
   constructor(private issuesService: IssuesService) {
   }
 
-  isLoading$ = this.issuesService.isLoading$;
-
   ngAfterViewInit(): void {
     const searchBox = document.getElementById('search-bar');
     const searchQuery$ = fromEvent<any>(searchBox, 'keyup')

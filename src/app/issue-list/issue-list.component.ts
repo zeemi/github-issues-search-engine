@@ -14,8 +14,6 @@ export class IssueListComponent implements OnInit{
     private likedService: LikedService,
   ) {}
 
-  issues$ = this.issuesService.issues$;
-
   toggleLiked(id) {
     this.likedService.toggleLiked(id);
   }

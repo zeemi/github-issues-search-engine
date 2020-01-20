@@ -1,2 +1,4 @@
-<label>Enter gitlab issues description:</label>
-<input id="search-bar"/> <span *ngIf="isLoading$| async ">Spinner placeholder</span>
+<mat-form-field mat-autosize class="search-bar">
+  <input matInput placeholder="Enter gitlab issues description" id="search-bar"/>
+</mat-form-field>
+

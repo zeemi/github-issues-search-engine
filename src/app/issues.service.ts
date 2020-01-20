@@ -14,6 +14,7 @@ export class IssuesService {
   issues$ = this.issuesSource$.asObservable();
   private isLoadingSource$ = new BehaviorSubject(false);
   isLoading$ = this.isLoadingSource$.asObservable();
+
   constructor(private http: HttpClient) {}
 
   getIssues() {
@@ -22,7 +23,7 @@ export class IssuesService {
 
   search(query) {
     this.isLoadingSource$.next(true);
-    this.http.get(`https://api.github.com/search/issues?q=${query}`)
+    this.http.get(`https://api.github.com/search/issues?q=${query}+state:open`)
       .pipe(tap(() => {
         return this.isLoadingSource$.next(false);
       }))
