@@ -2,7 +2,6 @@ import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 import { tap } from 'rxjs/internal/operators';
-import fakeIssues from './issues';
 
 @Injectable({
   providedIn: 'root'
