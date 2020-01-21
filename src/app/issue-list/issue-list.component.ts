@@ -8,10 +8,9 @@ import { LikedService } from '../liked.service';
   styleUrls: ['./issue-list.component.scss']
 })
 export class IssueListComponent implements OnInit {
-
   constructor(
-    private issuesService: IssuesService,
-    private likedService: LikedService,
+    public issuesService: IssuesService,
+    public likedService: LikedService,
   ) {}
 
   toggleLiked(id) {
