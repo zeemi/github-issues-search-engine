@@ -27,7 +27,6 @@ export class SearchBarComponent implements AfterViewInit {
     this.subscription = searchQuery$
       .subscribe(
         query => {
-          console.log(query);
           this.issuesService.search(query);
         }
       );

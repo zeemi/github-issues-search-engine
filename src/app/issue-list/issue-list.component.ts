@@ -7,7 +7,7 @@ import { LikedService } from '../liked.service';
   templateUrl: './issue-list.component.html',
   styleUrls: ['./issue-list.component.scss']
 })
-export class IssueListComponent implements OnInit{
+export class IssueListComponent implements OnInit {
 
   constructor(
     private issuesService: IssuesService,

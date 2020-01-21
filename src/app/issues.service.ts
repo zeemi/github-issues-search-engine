@@ -1,8 +1,8 @@
-import  {Injectable} from '@angular/core';
-import {BehaviorSubject, Observable, of, Subject} from 'rxjs';
+import { Injectable } from '@angular/core';
+import { BehaviorSubject } from 'rxjs';
+import { HttpClient } from '@angular/common/http';
+import { tap } from 'rxjs/internal/operators';
 import fakeIssues from './issues';
-import {HttpClient} from '@angular/common/http';
-import {tap} from 'rxjs/internal/operators';
 
 @Injectable({
   providedIn: 'root'
@@ -27,6 +27,6 @@ export class IssuesService {
       .pipe(tap(() => {
         return this.isLoadingSource$.next(false);
       }))
-      .subscribe((data: any) =>  this.issuesSource$.next(data.items), error  => console.log(error), () => console.log('finished'));
+      .subscribe((data: any) => this.issuesSource$.next(data.items), error => console.log(error), () => console.log('finished'));
   }
 }
