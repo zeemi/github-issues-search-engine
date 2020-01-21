@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { BehaviorSubject } from 'rxjs';
 
 const localStorageKey = 'likedIssuesIds';
 
@@ -7,10 +8,10 @@ const localStorageKey = 'likedIssuesIds';
 })
 export class LikedService {
 
-  liked;
-  constructor() {
-    this.liked = {};
-  }
+  private likedSource$ = new BehaviorSubject({});
+  liked$ = this.likedSource$.asObservable();
+
+  constructor() {}
 
   private store(value) {
     localStorage.setItem(localStorageKey, JSON.stringify(value));
@@ -21,12 +22,13 @@ export class LikedService {
   }
 
   init() {
-    this.liked = this.retrieve();
+    this.likedSource$.next(this.retrieve());
   }
+
   toggleLiked(id) {
-    const modifiedLiked = this.retrieve();
-    modifiedLiked[id] = !modifiedLiked[id];
-    this.store( modifiedLiked);
-    this.liked = modifiedLiked;
+    const liked = this.retrieve();
+    liked[id] = !liked[id];
+    this.store(liked);
+    this.likedSource$.next(liked);
   }
 }
